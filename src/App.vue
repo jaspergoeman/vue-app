@@ -1,7 +1,7 @@
 <template>
 <div>
     <Header @setDoelgroep="setDoelgroep" />
-    <Beam :topics="topics" :subgroups="subgroups" @setTopic="setTopic" @setSubgroup="setSubgroup" />
+    <Beam  @setTopic="setTopic" @setSubgroup="setSubgroup" />
 </div>
 </template>
 
@@ -13,27 +13,6 @@ export default {
     name: 'App',
     data: () => {
         return {
-            subgroups: ["EMPIRische THERAPIE",
-                "GERICHTE THERAPIE",
-                "MIDdelEN",
-                "PROFYLAXE",
-                "TDM"
-            ],
-            topics: ["ABDOMINAAL",
-                "CARDIOVASCULAIR",
-                "CENTRAAL ZENUWSTELSEL",
-                "GISTEN EN SCHIMMELS",
-                "HUID EN WEKE DELEN",
-                "NEUS-KEEL-OOR",
-                "NEUTROPENE KOORTS",
-                "OOG",
-                "ORTHOPEDIE",
-                "REISGENEESKUNDE",
-                "RESPIRATOIR",
-                "SEPSIS",
-                "URINAIR",
-                "UROGENITAAL EN SEKSUEEL OVERDRAAGBARE INFECTIES"
-            ],
             doelgroep: String,
             topic: String,
             subgroup: String
@@ -66,7 +45,13 @@ export default {
 // ------------------------------------------------------------------
 // Typography
 // ------------------------------------------------------------------
-
+@font-face {
+  font-family: 'Arboria-Book';
+  src: local('Arboria'), url(./fonts/Arboria-Medium.otf) format('truetype');
+}
+body {
+  font-family: 'Arboria', sans-serif;
+  font-weight: 500;}
 h1 {
     color: $color-primary;
     text-transform: uppercase;

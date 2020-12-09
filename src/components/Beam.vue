@@ -1,45 +1,62 @@
 <script>
 export default {
     name: 'Beam',
-    props: {
-        topics: {
-            type: Array
-        },
-        subgroups: {
-            type: Array
-        }
-    },
+    
     data: () => {
         return {
             selectedTopic: "",
-            selectedSubgroup: ""
+            selectedSubgroup: "",
+            showInput: false,
+            subgroups: ["EMPIRische THERAPIE",
+                "GERICHTE THERAPIE",
+                "MIDdelEN",
+                "PROFYLAXE",
+                "TDM"
+            ],
+            topics: ["ABDOMINAAL",
+                "CARDIOVASCULAIR",
+                "CENTRAAL ZENUWSTELSEL",
+                "GISTEN EN SCHIMMELS",
+                "HUID EN WEKE DELEN",
+                "NEUS-KEEL-OOR",
+                "NEUTROPENE KOORTS",
+                "OOG",
+                "ORTHOPEDIE",
+                "REISGENEESKUNDE",
+                "RESPIRATOIR",
+                "SEPSIS",
+                "URINAIR",
+                "UROGENITAAL EN SEKSUEEL OVERDRAAGBARE INFECTIES"
+            ],
         }
     },
     methods: {
         setTopic: function (topic) {
             this.selectedTopic = topic;
             this.$emit('setTopic', this.selectedTopic);
+            this.showInput= false;
         },
         setSubgroup: function (subgroup) {
             this.selectedSubgroup = subgroup;
             this.$emit('setSubgroup', this.selectedSubgroup);
+            this.showInput= false;
         }
     }
 }
 </script>
 <template>
 <div>
-    <section className="App-section App-section--primary">
-        <div className="App-container App-container--xl">
-            <div className="beam">
+    <section class="App-section App-section--primary">
+        <div class="App-container App-container--xl">
+            <div class="beam">
                 <ul>
-                    <li v-for="subgroup in subgroups" :key="subgroup">
+                   <li v-for="subgroup in subgroups" :key="subgroup">
                         <a v-bind:class="[selectedSubgroup === subgroup ? 'beam__isSelected' :'']" v-on:click="setSubgroup(subgroup)">{{subgroup}}</a>
                     </li>
-                    <div className="beam__div-item">
-                        <input className="beam__input" type="text" placeholder="zoekterm" />
-                        <div className="clickable beam__search">
-                            <i class="fas fa-search"></i>
+                    <div class="beam__div-item">
+                        <input v-if="showInput" class="beam__input" type="text" placeholder="zoekterm" />
+                        <div class="clickable beam__search">
+                            <i class="fas fa-search"  v-on:mouseover="showInput = true"></i>
                         </div>
 
                     </div>
@@ -48,12 +65,12 @@ export default {
             </div>
         </div>
     </section>
-    <section className="App-section App-section--secondary">
-        <div className="App-container App-container--xl">
-            <div className="beam">
+    <section class="App-section App-section--secondary">
+        <div class="App-container App-container--xl">
+            <div class="beam">
                 <ul>
                     <li v-for="topic in topics" :key="topic">
-                        <a v-bind:class="[selectedTopic === topic ? 'beam__isSelected' :'']" v-on:click="setTopic(topic)">{{topic}}</a>
+                        <a v-bind:class="[selectedTopic === topic ? 'beam__isSelected' : '' ]" v-on:click="setTopic(topic)">{{topic}}</a>
                     </li>
                 </ul>
             </div>
@@ -87,16 +104,9 @@ export default {
         }
     }
 
-    &__subgroup__isSelected {
-        a {
-            text-decoration: overline;
-        }
-    }
+    &__isSelected {
+        text-decoration: overline;
 
-    &__topic__isSelected {
-        a {
-            text-decoration: overline;
-        }
     }
 
     &__div-item {
