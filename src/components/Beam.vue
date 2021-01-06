@@ -1,4 +1,7 @@
 <script>
+import subgroups from "../assets/data/subgroups.json";
+import topics from "../assets/data/topics.json";
+
 export default {
     name: 'Beam',
     
@@ -7,27 +10,8 @@ export default {
             selectedTopic: "",
             selectedSubgroup: "",
             showInput: false,
-            subgroups: ["EMPIRische THERAPIE",
-                "GERICHTE THERAPIE",
-                "MIDdelEN",
-                "PROFYLAXE",
-                "TDM"
-            ],
-            topics: ["ABDOMINAAL",
-                "CARDIOVASCULAIR",
-                "CENTRAAL ZENUWSTELSEL",
-                "GISTEN EN SCHIMMELS",
-                "HUID EN WEKE DELEN",
-                "NEUS-KEEL-OOR",
-                "NEUTROPENE KOORTS",
-                "OOG",
-                "ORTHOPEDIE",
-                "REISGENEESKUNDE",
-                "RESPIRATOIR",
-                "SEPSIS",
-                "URINAIR",
-                "UROGENITAAL EN SEKSUEEL OVERDRAAGBARE INFECTIES"
-            ],
+            subgroups: subgroups,
+            topics: topics,
         }
     },
     methods: {
@@ -41,7 +25,8 @@ export default {
             this.$emit('setSubgroup', this.selectedSubgroup);
             this.showInput= false;
         }
-    }
+    },
+    
 }
 </script>
 <template>
@@ -50,11 +35,11 @@ export default {
         <div class="App-container App-container--xl">
             <div class="beam">
                 <ul>
-                   <li v-for="subgroup in subgroups" :key="subgroup">
-                        <a v-bind:class="[selectedSubgroup === subgroup ? 'beam__isSelected' :'']" v-on:click="setSubgroup(subgroup)">{{subgroup}}</a>
+                   <li v-for="subgroup in subgroups" :key="subgroup.name">
+                        <a v-bind:class="[selectedSubgroup === subgroup.name ? 'beam__isSelected' :'']" v-on:click="setSubgroup(subgroup.name)">{{subgroup.name}}</a>
                     </li>
                     <div class="beam__div-item">
-                        <input v-if="showInput" class="beam__input" type="text" placeholder="zoekterm" />
+                        <input v-if="showInput" class="beam__input" type="text"  placeholder="zoekterm" />
                         <div class="clickable beam__search">
                             <i class="fas fa-search"  v-on:mouseover="showInput = true"></i>
                         </div>
@@ -69,8 +54,8 @@ export default {
         <div class="App-container App-container--xl">
             <div class="beam">
                 <ul>
-                    <li v-for="topic in topics" :key="topic">
-                        <a v-bind:class="[selectedTopic === topic ? 'beam__isSelected' : '' ]" v-on:click="setTopic(topic)">{{topic}}</a>
+                    <li v-for="topic in topics" :key="topic.name">
+                        <a v-bind:class="[selectedTopic === topic.name ? 'beam__isSelected' : '' ]" v-on:click="setTopic(topic.name)">{{topic.name}}</a>
                     </li>
                 </ul>
             </div>

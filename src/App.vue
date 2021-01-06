@@ -2,12 +2,15 @@
 <div>
     <Header @setDoelgroep="setDoelgroep" />
     <Beam  @setTopic="setTopic" @setSubgroup="setSubgroup" />
+    <Aandoeninggroepen :selectedTopic="topic" :selectedSubgroup="subgroup" :doelgroep="doelgroep"/>
 </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Beam from './components/Beam.vue';
+import Aandoeninggroepen from './components/Aandoeninggroepen.vue';
+
 
 export default {
     name: 'App',
@@ -21,19 +24,18 @@ export default {
     components: {
         Header,
         Beam,
+        Aandoeninggroepen,
     },
     methods: {
         setDoelgroep(doelgroep) {
             this.doelgroep = doelgroep;
-            console.log(this.doelgroep);
         },
         setSubgroup(subgroup) {
             this.subgroup = subgroup;
-            console.log(this.subgroup);
+            console.log(subgroup);
         },
         setTopic(topic) {
             this.topic = topic;
-            console.log(this.topic);
         }
     }
 }
